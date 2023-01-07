@@ -1,0 +1,11 @@
+{
+  "label": "Truckload market",
+  "position": 1.2,
+  "link": {
+    "type": "generated-index",
+    "title": "U.S. Truckload Market Guide"
+  },
+  "customProps": {
+    "description": "Guide to the U.S. Truckload Market"
+  }
+}

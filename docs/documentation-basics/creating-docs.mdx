@@ -1,0 +1,70 @@
+---
+sidebar_position: 1
+---
+
+# Creating Docs
+
+Documentation files are located in the `docs` directory.
+
+<br />
+
+## Creating a section
+
+Create a new directory in `docs/{section_name}` and add a `_category_.json` file. This file will contain the sidebar position of the section along with the title.
+
+<br />
+
+## Adding to an existing Section
+
+1. Create a new `.mdx.` file in `docs//{section_name}` directory
+2. Follow file naming convention: "{sectionName}-{pageTitle}.mdx"
+3. Add the following at the top of the new .mdx file to modify the side bar positioning
+
+```mdx
+---
+sidebar_position: 2
+---
+```
+
+Make sure to Add the "title" you want displayed based on the file name.
+
+<br />
+
+## Commit your changes
+
+Once you made edits and add a new file, you can live-test it by running the command
+
+```
+npx docusaurus start
+```
+
+Then open in your browser:
+
+```
+http://localhost:3000/
+```
+
+<br />
+
+## MDX
+
+MDX supports Markdown out of the box. To learn more about markdown, see [markdown cheatsheet.](https://www.markdownguide.org/cheat-sheet/)
+
+These docs are written using .mdx files. Learn more about MDX in [their docs.](https://mdxjs.com/getting-started)
+
+<br />
+
+## How to customize the Theme
+
+We use Smooth-Doc, which is a Gatsby theme to create this documentation. In simple terms, we are using a theme to get rid of all the complexity. As a result, if we want to make changes to the theme, we can use [smooth-docs documentation](https://smooth-doc.com/docs/getting-started/)
+
+<br />
+
+### Add Live code
+
+````
+    ```js live noInline
+    const content = 'Example'
+    render(<div>{content}</div>)
+    ```
+````

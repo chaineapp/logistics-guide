@@ -1,0 +1,11 @@
+{
+  "label": "Supply chain",
+  "position": 5,
+  "link": {
+    "type": "generated-index",
+    "title": "Supply Chaine Guide"
+  },
+  "customProps": {
+    "description": "Suppy chains"
+  }
+}

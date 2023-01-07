@@ -1,0 +1,11 @@
+{
+  "label": "Logistics",
+  "position": 1,
+  "link": {
+    "type": "generated-index",
+    "title": "The ultimate logistics guide"
+  },
+  "customProps": {
+    "description": "A comprehensive guide to logistics"
+  }
+}

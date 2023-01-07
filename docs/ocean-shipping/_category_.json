@@ -1,0 +1,11 @@
+{
+  "label": "Ocean shipping",
+  "position": 4,
+  "link": {
+    "type": "generated-index",
+    "title": "Ocean Container Shipping Guide"
+  },
+  "customProps": {
+    "description": "Learn about ocean container shipping"
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "name": "the-ultimate-logistics-guide",
+  "version": "0.0.0",
+  "private": true,
+  "engines": {
+    "npm": "🚨 👉👉 Please use yarn 👈👈 🚨",
+    "yarn": "1.22.10",
+    "node": "16.16.0"
+  },
+  "scripts": {
+    "docusaurus": "docusaurus",
+    "start": "docusaurus start",
+    "build": "docusaurus build",
+    "swizzle": "docusaurus swizzle",
+    "deploy": "serverless client deploy --no-confirm",
+    "clear": "docusaurus clear",
+    "serve": "docusaurus serve",
+    "clean:docs:api": "yarn docusaurus clean-api-docs all",
+    "build:docs:api": "yarn docusaurus gen-api-docs all",
+    "build:api": "yarn clean:docs:api && yarn build:docs:api",
+    "write-translations": "docusaurus write-translations",
+    "write-heading-ids": "docusaurus write-heading-ids"
+  },
+  "dependencies": {
+    "@chakra-ui/react": "2.4.4",
+    "@docusaurus/core": "2.2.0",
+    "@docusaurus/preset-classic": "2.2.0",
+    "@docusaurus/theme-classic": "2.2.0",
+    "@docusaurus/theme-common": "2.2.0",
+    "@emotion/react": "11.10.5",
+    "@emotion/styled": "11.10.5",
+    "@mdx-js/react": "^1.6.21",
+    "@svgr/webpack": "^5.5.0",
+    "@xstyled/styled-components": "^3.1.2",
+    "clsx": "1.1.1",
+    "docusaurus-plugin-openapi-docs": "^1.5.0",
+    "docusaurus-theme-openapi-docs": "^1.5.0",
+    "file-loader": "6.2.0",
+    "focus-visible": "^5.2.0",
+    "framer-motion": "7.10.2",
+    "prism-react-renderer": "^1.2.1",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "serverless-finch": "4.0.0",
+    "serverless-s3-deploy": "^0.10.1",
+    "styled-components": "^5.3.3",
+    "url-loader": "^4.1.1"
+  },
+  "browserslist": {
+    "production": [
+      ">0.5%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "serverless": "^3.12.0"
+  }
+}

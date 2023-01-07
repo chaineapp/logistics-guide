@@ -1,0 +1,47 @@
+---
+sidebar_position: 7
+keywords: [load lifecycle]
+description: The lifecyle of a load and its different milestones.
+---
+
+# Shipment Lifecyle
+
+## Overall Load Status
+
+1. **Quoting** - The shipper has asked the broker to get quotes and the broker begins to find trucks to confirm a rate to haul the shipment.
+   - MercuryGate: Pending
+   - Revenova: Unassigned
+1. **Canceled** - The shipment is canceled by the shipper or by the broker (in case the broker wants to find another truck). The shipment can also be canceled by the shipper for many reasons, including deciding to ship it out another day or if the product is not ready to ship yet.
+1. **Carrier Confirmed** - A carrier is found and a rate confirmation (or contract) is sent to the carrier to accept.
+   - MercuryGate: Tendered
+   - Revenova: Assigned
+1. **Accepted** - The carrier has accepted the load tender (or rate confirmation)
+   - MercuryGate: Booked
+   - Revenova:
+1. **Dispatched** - Information on pickup and delivery has verbally been communicated with the dispatcher and/or driver. Getting ETA to pick-up is completed.
+1. **At Pickup** - The driver has arrived at the first pickup location. Once loaded, the driver will be handed a Bill of Lading (BOL) which contains all the details on what the shipment is, how much it weighs, what is the total number of pieces or units, where it needs to deliver, etc..
+1. **In Transit** - The load is been fully picked up and the truck is loaded, and now is headed to the delivery location.
+1. **At Delivery** - The load has arrived at the delivery location and has begun unloading.
+1. **Delivered** - The truck is completely unloaded, and the truck driver has received the signature from the delivery location on the load's BOL, this is now called the proof-of-delivery (POD)
+
+## Tracking Glossary (for TL)
+
+- Dispatched
+- Estimated Arrival
+- Arrived at Pickup
+- Departed (Loaded) Pickup
+- Estimated Delivery
+- Arrived at Delivery
+- Departed (Unloaded) Delivery
+
+## Tracking Glossary (for LTL)
+
+Tracking terms that are commonly shared with shipper customers
+
+- Estimated Delivery: Estimated delivery of the freight shipment based on scheduled pick up date and distance to final destination. This is not a guaranteed delivery date, just the best estimate based on standard transit time.
+- Ordered: Shipper confirmed their order and agreed a broker will move your shipment.
+- Dispatched: A Carrier agreed to move a shipper's shipment and dispatched a truck to the shipper's pickup location.
+- Picked Up: The shipment was successfully picked up from the designated pickup location.
+- In Transit: Indicates the city and state of the last known location, allowing a broker or shipper to see the progress of their shipment from pickup to delivery location.
+- Out for Delivery: The shipment is out for delivery and will be delivered that day.
+- Delivered: The LTL carriers reached the final destination and the shipment was successfully unloaded.

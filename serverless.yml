@@ -1,0 +1,77 @@
+service: the-ultimate-logistics-guide
+app: handbook
+
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs16.x
+  lambdaHashingVersion: 20201221
+  region: us-east-1
+  memorySize: 1024
+  timeout: 60
+  logRetentionInDays: 7
+
+plugins:
+  - serverless-finch
+  - serverless-s3-deploy
+
+custom:
+  bucket:
+    name: chaine-the-ultimate-logistics-guide
+  client:
+    bucketName: ${self:custom.bucket.name}
+    distributionFolder: build
+    errorDocument: 404.html
+    sse: AES256
+
+  assets:
+    # Automatically copying public folder and distribution to S3 stopped working; we do it manually now
+    auto: false
+    targets:
+      - bucket: ${self:custom.bucket.name}
+        acl: public-read
+        files:
+          - source: build/
+            headers:
+              CacheControl: max-age=31104000 # 1 year
+            globs:
+              - '**/*'
+
+resources:
+  Resources:
+    # S3 Bucket for the distribution bundles
+    DistBucket:
+      Type: AWS::S3::Bucket
+      DeletionPolicy: Delete
+      Properties:
+        BucketName: ${self:custom.bucket.name}
+        AccessControl: Private
+        CorsConfiguration:
+          CorsRules:
+            - AllowedHeaders:
+                - '*'
+              AllowedMethods:
+                - 'GET'
+              AllowedOrigins:
+                - Fn::Join:
+                    - ''
+                    - - https://
+                      - Ref: ApiGatewayRestApi
+                      - .execute-api.
+                      - Ref: AWS::Region
+                      - .amazonaws.com
+                - Fn::Join:
+                    - ''
+                    - - https://chaineapp.com
+              MaxAge: 3000
+
+  Outputs:
+    ApiGatewayRestApi:
+      Description: API Gateway Endpoint
+      Value:
+        Ref: ApiGatewayRestApi
+    DistBucket:
+      Description: Distribution S3 Bucket
+      Value:
+        Ref: DistBucket
