@@ -5,7 +5,7 @@ frameworkVersion: '3'
 
 provider:
   name: aws
-  runtime: nodejs16.x
+  runtime: nodejs14.x
   lambdaHashingVersion: 20201221
   region: us-east-1
   memorySize: 1024

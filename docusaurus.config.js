@@ -8,7 +8,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula')
 const config = {
   title: 'The Ultimate Logistics Guide',
   tagline: 'An open-source guide on logistics, supply-chain and the U.S truckload markedt',
-  url: 'https://chaineapp.com',
+  url: 'https://logistics.chaineapp.com',
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
@@ -18,12 +18,18 @@ const config = {
   presets: [
     [
       '@docusaurus/preset-classic',
-      /** @type {import('@docusaurus/preset-classic').Options} */
-      ({
+
+      {
+        sitemap: {
+          changefreq: 'weekly',
+          priority: 0.5,
+          ignorePatterns: ['/tags/**'],
+          filename: 'sitemap.xml'
+        },
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
-          path: './docs',
-          routeBasePath: '/logistics-guide',
+          path: 'docs',
+          routeBasePath: '/',
           // Please change this to your repo.
           editUrl: 'https://github.com/chaineapp/logistics-guide',
           docLayoutComponent: '@theme/DocPage'
@@ -36,7 +42,7 @@ const config = {
         theme: {
           customCss: require.resolve('./src/css/custom.css')
         }
-      })
+      }
     ]
   ],
   themeConfig:
@@ -60,7 +66,7 @@ const config = {
         },
         items: [
           {
-            to: '/logistics-guide',
+            to: '/',
             position: 'left',
             label: 'Logistics guide'
           },
@@ -79,7 +85,7 @@ const config = {
             items: [
               {
                 label: 'Documentation Basics',
-                to: '/logistics-guide/documentation-basics/creating-docs'
+                to: '/documentation-basics/creating-docs'
               }
             ]
           },

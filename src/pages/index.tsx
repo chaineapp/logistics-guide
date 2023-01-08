@@ -21,47 +21,47 @@ function HomepageHeader() {
             <LinkCards
               cards={[
                 {
-                  to: '/logistics-guide/getting-started',
+                  to: '/getting-started',
                   label: 'Explore',
                   description: 'Explore the logistics guide'
                 },
                 {
-                  to: '/logistics-guide/category/truckload-market',
+                  to: '/category/truckload-market',
                   label: 'Truckload Market',
                   description: 'U.S. Truckload Market Guide'
                 },
                 {
-                  to: '/logistics-guide/category/the-different-players-in-logistics',
-                  label: 'The players',
+                  to: '/category/the-different-players-in-logistics',
+                  label: 'The Players',
                   description: 'Learn about brokers, carriers, shippers'
                 },
                 {
-                  to: '/logistics-guide/category/ocean-shipping',
+                  to: '/category/ocean-shipping',
                   label: 'Ocean freight',
                   description: 'Ocean Container Shipping Guide'
                 },
                 {
-                  to: '/logistics-guide/category/software',
+                  to: '/category/software',
                   label: 'Software',
                   description: 'Logistics Software Guide'
                 },
                 {
-                  to: '/logistics-guide/category/supply-chain',
+                  to: '/category/supply-chain',
                   label: 'Supply Chain(e)',
                   description: 'Supply Chain(e) Guide'
                 },
                 {
-                  to: '/logistics-guide/logistics-dictionary',
+                  to: '/logistics-dictionary',
                   label: 'Dictionary',
                   description: 'Terms used in logistics'
                 },
                 {
-                  to: '/logistics-guide/logistics-videos',
+                  to: '/logistics-videos',
                   label: 'Educational videos',
                   description: 'Various helpful videos'
                 },
                 {
-                  to: '/logistics-guide/logistics-cost-to-serve',
+                  to: '/logistics-cost-to-serve',
                   label: 'Cost-to-serve',
                   description: 'What is cost-to-serve?'
                 }
@@ -77,7 +77,10 @@ function HomepageHeader() {
 export default function Home() {
   const {siteConfig} = useDocusaurusContext()
   return (
-    <Layout title={`Hello from ${siteConfig.title}`} description="Description will go into a meta tag in <head />">
+    <Layout
+      title={`${siteConfig.title}`}
+      description="An open-source guide on logistics, supply-chain and the U.S truckload market."
+    >
       <HomepageHeader />
 
       <main>{/* <HomepageFeatures /> */}</main>
