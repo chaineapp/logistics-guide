@@ -23,7 +23,7 @@ const config = {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
           path: './docs',
-          routeBasePath: 'logistics-guide',
+          routeBasePath: '/logistics-guide',
           // Please change this to your repo.
           editUrl: 'https://github.com/chaineapp/logistics-guide',
           docLayoutComponent: '@theme/DocPage'
@@ -60,7 +60,7 @@ const config = {
         },
         items: [
           {
-            to: '/',
+            to: '/logistics-guide',
             position: 'left',
             label: 'Logistics guide'
           },
