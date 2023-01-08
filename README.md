@@ -2,7 +2,7 @@
 
 A guide with various topics in logistics and supply-chain, including a section on the U.S Truckload market.
 
-You can access the guide here: [The Ultimate Logistics Guide ](https://chaineapp.com/logistics-guide).
+You can access the guide here: [The Ultimate Logistics Guide ](https://logistics.chaineapp.com).
 
 The guide is brought to you by [Chaine](https://chaineapp.com/), a social, collaborative logistics platform that makes it easy for freight brokers and truck carriers to work together.
 
