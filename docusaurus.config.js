@@ -9,13 +9,12 @@ const config = {
   title: 'The Ultimate Logistics Guide',
   tagline: 'An open-source guide on logistics, supply-chain and the U.S truckload markedt',
   url: 'https://chaineapp.com',
-  baseUrl: '/the-ultimate-logistics-guide',
+  baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
   organizationName: 'chaineapp', // Usually your GitHub org/user name.
-  projectName: 'the-ultimate-logistics-guide', // Usually your repo name.
-
+  projectName: 'logistics-guide', // Usually your repo name.
   presets: [
     [
       '@docusaurus/preset-classic',
@@ -23,9 +22,10 @@ const config = {
       ({
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
-          path: 'docs',
+          path: './docs',
+          routeBasePath: 'logistics-guide',
           // Please change this to your repo.
-          editUrl: 'https://github.com/chaineapp/the-ultimate-logistics-guide',
+          editUrl: 'https://github.com/chaineapp/logistics-guide',
           docLayoutComponent: '@theme/DocPage'
         },
         // blog: {
@@ -60,7 +60,7 @@ const config = {
         },
         items: [
           {
-            to: '/the-ultimate-logistics-guide',
+            to: '/',
             position: 'left',
             label: 'Logistics guide'
           },
@@ -79,7 +79,7 @@ const config = {
             items: [
               {
                 label: 'Documentation Basics',
-                to: '/docs/documentation-basics/creating-docs'
+                to: '/logistics-guide/documentation-basics/creating-docs'
               }
             ]
           },

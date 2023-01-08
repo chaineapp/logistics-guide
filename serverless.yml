@@ -1,5 +1,5 @@
-service: the-ultimate-logistics-guide
-app: handbook
+service: logistics-guide
+app: chaine
 
 frameworkVersion: '3'
 

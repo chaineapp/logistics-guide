@@ -21,47 +21,47 @@ function HomepageHeader() {
             <LinkCards
               cards={[
                 {
-                  to: '/the-ultimate-logistics-guide/docs/getting-started',
+                  to: '/logistics-guide/getting-started',
                   label: 'Explore',
                   description: 'Explore the logistics guide'
                 },
                 {
-                  to: '/the-ultimate-logistics-guide/docs/category/truckload-market',
+                  to: '/logistics-guide/category/truckload-market',
                   label: 'Truckload Market',
                   description: 'U.S. Truckload Market Guide'
                 },
                 {
-                  to: '/the-ultimate-logistics-guide/docs/category/the-different-players-in-logistics',
+                  to: '/logistics-guide/category/the-different-players-in-logistics',
                   label: 'The players',
                   description: 'Learn about brokers, carriers, shippers'
                 },
                 {
-                  to: '/the-ultimate-logistics-guide/docs/category/ocean-shipping',
+                  to: '/logistics-guide/category/ocean-shipping',
                   label: 'Ocean freight',
                   description: 'Ocean Container Shipping Guide'
                 },
                 {
-                  to: '/the-ultimate-logistics-guide/docs/category/software',
+                  to: '/logistics-guide/category/software',
                   label: 'Software',
                   description: 'Logistics Software Guide'
                 },
                 {
-                  to: '/the-ultimate-logistics-guide/docs/category/supply-chain',
+                  to: '/logistics-guide/category/supply-chain',
                   label: 'Supply Chain(e)',
                   description: 'Supply Chain(e) Guide'
                 },
                 {
-                  to: '/the-ultimate-logistics-guide/docs/logistics-dictionary',
+                  to: '/logistics-guide/logistics-dictionary',
                   label: 'Dictionary',
                   description: 'Terms used in logistics'
                 },
                 {
-                  to: '/the-ultimate-logistics-guide/docs/logistics-videos',
+                  to: '/logistics-guide/logistics-videos',
                   label: 'Educational videos',
                   description: 'Various helpful videos'
                 },
                 {
-                  to: '/the-ultimate-logistics-guide/docs/logistics-cost-to-serve',
+                  to: '/logistics-guide/logistics-cost-to-serve',
                   label: 'Cost-to-serve',
                   description: 'What is cost-to-serve?'
                 }

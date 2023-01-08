@@ -11,7 +11,6 @@ export const Stat = (props: Props) => {
   const {label, description, to, ...boxProps} = props
   const {colorMode, setColorMode} = useColorMode()
   const textColor = colorMode === 'light' ? 'black' : 'white'
-  console.log(colorMode)
   return (
     <Link to={to}>
       <Box

@@ -1,5 +1,5 @@
 {
-  "name": "the-ultimate-logistics-guide",
+  "name": "@chaine/logistics-guide",
   "version": "0.0.0",
   "private": true,
   "engines": {
@@ -59,6 +59,7 @@
     ]
   },
   "devDependencies": {
+    "@docusaurus/plugin-sitemap": "^2.2.0",
     "serverless": "^3.12.0"
   }
 }
