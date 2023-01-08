@@ -71,7 +71,7 @@ const config = {
             label: 'Logistics guide'
           },
           {
-            href: 'https://github.com/chaineapp/chaine/logistics-guide',
+            href: 'https://github.com/chaineapp/logistics-guide',
             label: 'GitHub',
             position: 'right'
           }
