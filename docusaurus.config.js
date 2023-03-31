@@ -7,7 +7,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula')
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'The Ultimate Logistics Guide',
-  tagline: 'An open-source guide on logistics, supply-chain and the U.S truckload markedt',
+  tagline: 'An open-source guide on logistics, supply-chain and the U.S truckload market',
   url: 'https://logistics.chaineapp.com',
   baseUrl: '/',
   onBrokenLinks: 'throw',
