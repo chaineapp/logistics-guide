@@ -7,6 +7,19 @@
     "yarn": "1.22.10",
     "node": "16.16.0"
   },
+  "keywords": [
+    "logistics",
+    "supply chain",
+    "trucking",
+    "transportation",
+    "edi",
+    "intermodal",
+    "eld api",
+    "edi api",
+    "freight broker",
+    "truck carrier",
+    "shipper"
+  ],
   "scripts": {
     "docusaurus": "docusaurus",
     "start": "docusaurus start",
