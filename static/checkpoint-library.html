@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Checkpoint Library — Chain Autopilot</title>
+<style>
+:root{--ink:#16223B;--muted:#5C6678;--faint:#8B94A6;--paper:#F5F7FA;--card:#fff;--line:#E3E7EE;
+--teal:#0E6E82;--teal-soft:#E4F0F2;--teal-ink:#0A5464;
+--serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+--sans:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+--mono:ui-monospace,"SF Mono","Cascadia Code",Menlo,Consolas,monospace;}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.55}
+.wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+:focus-visible{outline:2px solid var(--teal);outline-offset:2px;border-radius:4px}
+header.mast{background:radial-gradient(120% 140% at 88% -10%,rgba(14,110,130,.16),transparent 60%),linear-gradient(180deg,#0f1a30,#16223B);color:#EEF2F7;padding:46px 0 36px;border-bottom:3px solid var(--teal)}
+.eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:#7FD3E0;margin:0 0 14px}
+h1{font-family:var(--serif);font-weight:600;font-size:clamp(2.2rem,5.5vw,3.5rem);line-height:1.03;margin:0;letter-spacing:-.01em}
+h1 em{font-style:italic;color:#9BDCE7}
+.lede{max-width:66ch;color:#C4CDDA;margin:16px 0 0;font-size:1.06rem}
+.controls{position:sticky;top:0;z-index:5;background:rgba(245,247,250,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:14px 0}
+.searchrow{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+#q{flex:1;min-width:220px;font-size:15px;padding:11px 14px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);font-family:var(--sans)}
+#count{font-family:var(--mono);font-size:12.5px;color:var(--muted);white-space:nowrap}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.chip{font-size:12.5px;border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:20px;padding:6px 12px;cursor:pointer;display:inline-flex;align-items:center;gap:7px;font-family:var(--sans)}
+.chip i{width:9px;height:9px;border-radius:50%}
+.chip b{color:var(--muted);font-weight:600}
+.chip[aria-pressed=true]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.chip[aria-pressed=true] b{color:#9BDCE7}
+.chip.all[aria-pressed=true]{background:var(--teal);border-color:var(--teal)}
+main{padding:14px 0 40px}
+.stageblurb{display:flex;gap:13px;align-items:flex-start;margin:26px 0 14px;padding-top:20px;border-top:1px solid var(--line)}
+.stageblurb:first-child{border-top:0;padding-top:6px}
+.sdot{width:12px;height:12px;border-radius:50%;margin-top:7px;flex:0 0 auto}
+.stageblurb h2{font-family:var(--serif);font-weight:600;font-size:1.5rem;margin:0 0 2px}
+.stageblurb p{margin:0;color:var(--muted);font-size:14px;max-width:70ch}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:15px}
+.card{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--sc);border-radius:11px;padding:16px;display:flex;flex-direction:column;gap:9px;box-shadow:0 1px 2px rgba(22,34,59,.04),0 10px 22px -16px rgba(22,34,59,.2)}
+.ct{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.card h3{font-size:1.02rem;font-weight:670;margin:0;line-height:1.25;letter-spacing:-.01em}
+.tier{flex:0 0 auto;font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:20px;white-space:nowrap}
+.t1{color:#0A5464;background:var(--teal-soft)}.t2{color:#3a4658;background:#eef1f6}.t3{color:#7a6a2b;background:#f6f0dd}
+.stag{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#fff;background:var(--sc);align-self:flex-start;padding:2px 8px;border-radius:20px}
+.row{display:grid;grid-template-columns:44px 1fr;gap:9px;font-size:13.5px;align-items:start}
+.k{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);padding-top:2px}
+.v{color:#33405C}.does{color:var(--ink)}
+.ctbtn{margin-top:6px;align-self:flex-start;font-family:var(--sans);font-size:11.5px;background:var(--ink);color:#fff;border:0;border-radius:8px;padding:6px 12px;cursor:pointer}
+.ctbtn:hover{background:#26324b}
+.empty{text-align:center;color:var(--faint);padding:60px 0}
+section.build{background:var(--ink);color:#DCE3EC;margin-top:26px;padding:44px 0 52px}
+section.build h2{font-family:var(--serif);font-weight:600;font-size:1.7rem;color:#fff;margin:0 0 6px}
+section.build .sub{color:#93A0B3;max-width:64ch;margin:0 0 26px}
+.bgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.block{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:18px}
+.block h3{font-family:var(--mono);font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:#7FD3E0;margin:0 0 12px}
+.block p{margin:0 0 10px;font-size:13.5px;color:#C4CDDA;line-height:1.55}
+.block p:last-child{margin:0}.block b{color:#fff}
+footer{color:var(--faint);font-size:12px;padding:24px 0 50px}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<header class="mast"><div class="wrap">
+<p class="eyebrow">Chain · Autopilot</p>
+<h1>The <em>Checkpoint</em> Library</h1>
+<p class="lede">Checkpoints are the automated touchpoints Chain's tracking agent runs across a load's journey — each one watches for a moment and reaches out to the driver at exactly the right time. This is a catalog of the checkpoints teams rely on across the shipment lifecycle, to spark ideas for your own.</p>
+</div></header>
+<div class="controls"><div class="wrap">
+<div class="searchrow">
+<input id="q" type="search" placeholder="Search checkpoints — name, timing, purpose…" aria-label="Search checkpoints">
+<span id="count"></span>
+</div>
+<div class="chips"><button class="chip all" data-f="ALL" aria-pressed="true">All stages <b>35</b></button><button class="chip" data-f="PRE_PICKUP"><i style="background:#0E6E82"></i>Pre-Pickup <b>7</b></button><button class="chip" data-f="AT_PICKUP"><i style="background:#1E7A5A"></i>At Pickup <b>7</b></button><button class="chip" data-f="PICKUP_NUMBER_RELEASE"><i style="background:#7A5FA6"></i>Pickup # Release <b>2</b></button><button class="chip" data-f="IN_TRANSIT"><i style="background:#A6742B"></i>In Transit <b>4</b></button><button class="chip" data-f="PRE_DELIVERY"><i style="background:#B5566B"></i>Pre-Delivery <b>4</b></button><button class="chip" data-f="AT_DELIVERY"><i style="background:#2E6DB4"></i>At Delivery <b>5</b></button><button class="chip" data-f="POST_DELIVERY"><i style="background:#4A5568"></i>Post-Delivery <b>6</b></button></div>
+</div></div>
+<main><div class="wrap" id="body"></div><div class="empty" id="empty" hidden>No checkpoints match your search.</div></main>
+<section class="build"><div class="wrap">
+<h2>How to design your own</h2>
+<p class="sub">Every checkpoint is built from three simple parts. Mix them to fit your lanes and customers.</p>
+<div class="bgrid">
+<div class="block"><h3>When it fires</h3><p><b>Relative to a milestone</b> — a set time before or after the pickup or delivery appointment, the live ETA, or an arrival/departure.</p><p><b>On a change</b> — the moment a load is booked, or when it starts moving.</p><p><b>On a geofence</b> — as the truck enters or leaves a stop.</p></div>
+<div class="block"><h3>When it should apply</h3><p>Add conditions so a checkpoint only fires when it's useful — e.g. only if the driver's phone is on file, only while the load is in transit, or only on multi-day hauls. Conditions also let a checkpoint <b>auto-stop</b> once its job is done (tracking accepted, POD received).</p></div>
+<div class="block"><h3>Patterns worth copying</h3><p><b>Appointment vs ETA twins</b> — run the same delivery check off both the booked appointment and the live ETA to cover loads that drift.</p><p><b>Escalation ladders</b> — repeat a nudge at widening intervals (reminder → 2nd → final) until the driver complies.</p></div>
+</div></div></section>
+<footer><div class="wrap">Chain Autopilot · Checkpoint Library. Popularity reflects how broadly each checkpoint type is used across Chain's customer base.</div></footer>
+<script>
+const DATA=[{"intent": "PRE_PICKUP", "name": "Pre-Pickup (day of pickup)", "tier": 1, "when": "Morning of the pickup day", "does": "Confirms coverage, collects the driver's phone number and ETA, and reminds the carrier that tracking is required."}, {"intent": "PRE_PICKUP", "name": "Pre-Pickup at booking", "tier": 2, "when": "The moment a carrier is assigned", "does": "Starts the conversation as soon as the load is booked, so driver info is gathered early."}, {"intent": "PRE_PICKUP", "name": "Pre-Pickup \u2014 day before", "tier": 2, "when": "Afternoon/evening before pickup", "does": "Chases any missing driver details the day before so nothing is open on pickup morning."}, {"intent": "PRE_PICKUP", "name": "App-download reminder", "tier": 2, "when": "Night before pickup", "does": "Sends the Chain Driver App link ahead of time so tracking is live before the truck arrives."}, {"intent": "PRE_PICKUP", "name": "Pre-Pickup \u2014 first-come-first-serve", "tier": 2, "when": "Ahead of an FCFS pickup", "does": "A variant for pickups with no fixed appointment window."}, {"intent": "PRE_PICKUP", "name": "Time-of-day pickup variants", "tier": 2, "when": "Timed to the pickup window (e.g. before 10 AM, 10-5, after 5 PM)", "does": "Sends a message tailored to when the pickup is scheduled."}, {"intent": "PRE_PICKUP", "name": "Tracking-acceptance check", "tier": 3, "when": "~1 hour before pickup", "does": "Verifies the driver has accepted tracking before they arrive."}, {"intent": "AT_PICKUP", "name": "At Pickup", "tier": 1, "when": "A few minutes before the pickup ETA / appointment", "does": "Checks in with the driver as they roll up to the shipper."}, {"intent": "AT_PICKUP", "name": "At Pickup \u2014 no ETA on file", "tier": 2, "when": "At the pickup appointment when no ETA was given", "does": "Pings loads that never provided an ETA, right at appointment time."}, {"intent": "AT_PICKUP", "name": "Tracking reminder \u2014 1st / 2nd / final", "tier": 2, "when": "At and after the pickup appointment, if not tracking", "does": "An escalating ladder of nudges to accept tracking; each stops once the driver complies."}, {"intent": "AT_PICKUP", "name": "Tracking compliance", "tier": 2, "when": "When booked / at pickup", "does": "Reinforces the tracking requirement for the load."}, {"intent": "AT_PICKUP", "name": "BOL request (arrival / departure)", "tier": 2, "when": "Just after pickup arrival or departure", "does": "Requests the Bill of Lading and/or photos of the loaded product."}, {"intent": "AT_PICKUP", "name": "3-hour check-in", "tier": 3, "when": "A few hours after the pickup appointment", "does": "A dwell / detention check if the truck is still on-site."}, {"intent": "AT_PICKUP", "name": "Loaded confirmation", "tier": 3, "when": "After arrival, still on-site", "does": "Confirms the truck is loaded and ready to depart."}, {"intent": "PICKUP_NUMBER_RELEASE", "name": "Pickup number release", "tier": 2, "when": "Once tracking is on and the truck is at the shipper", "does": "Automatically releases the pickup/PO number \u2014 but only after tracking is active. Turns tracking into a requirement."}, {"intent": "PICKUP_NUMBER_RELEASE", "name": "Pickup number release on geofence", "tier": 2, "when": "On entering the pickup geofence", "does": "Same release, triggered by the truck physically entering the pickup geofence."}, {"intent": "IN_TRANSIT", "name": "In-transit daily check (day 1-4)", "tier": 1, "when": "Each morning of a multi-day load", "does": "A daily on-time + tracking check; only fires on loads long enough to need it."}, {"intent": "IN_TRANSIT", "name": "In-transit \u2014 not tracking", "tier": 2, "when": "Mid-haul, if tracking drops off", "does": "Nudges a load that fell off tracking after pickup back on."}, {"intent": "IN_TRANSIT", "name": "Delivery instructions to driver", "tier": 3, "when": "In transit, ahead of delivery", "does": "Sends the receiver's instructions and delivery details to the driver."}, {"intent": "IN_TRANSIT", "name": "Reefer set-point photo request", "tier": 3, "when": "Daily on temperature-controlled loads (day &/or night)", "does": "Requests a daily photo of the reefer set-point for cold-chain compliance."}, {"intent": "PRE_DELIVERY", "name": "Pre-delivery ETA / appointment check", "tier": 1, "when": "A set number of hours before the delivery appointment or ETA (1, 2, 3, 5, 24 hrs \u2014 you choose)", "does": "Confirms the driver is on pace and tracking for an on-time delivery. Most customers run this off both the appointment and the live ETA."}, {"intent": "PRE_DELIVERY", "name": "30 minutes before (FCFS)", "tier": 2, "when": "30 min before a first-come-first-serve delivery", "does": "A tight final confirmation tuned for FCFS receivers."}, {"intent": "PRE_DELIVERY", "name": "Before the delivery window closes", "tier": 2, "when": "Before the appointment window end", "does": "Ensures the truck arrives before the receiving window ends."}, {"intent": "PRE_DELIVERY", "name": "Request delivery ETA", "tier": 2, "when": "~1 hour before delivery", "does": "Asks the driver to provide a delivery ETA."}, {"intent": "AT_DELIVERY", "name": "At delivery (appointment)", "tier": 1, "when": "At the delivery appointment time", "does": "Confirms the driver is on-site and checking in for delivery."}, {"intent": "AT_DELIVERY", "name": "At delivery (live ETA)", "tier": 1, "when": "At the live delivery ETA", "does": "The ETA-anchored twin \u2014 catches deliveries that run ahead of or behind the booked appointment."}, {"intent": "AT_DELIVERY", "name": "Confirm driver on-site", "tier": 2, "when": "At / shortly after delivery arrival", "does": "Confirms arrival and that the driver has checked in."}, {"intent": "AT_DELIVERY", "name": "POD reminder", "tier": 2, "when": "Minutes after delivery arrival", "does": "Reminds the driver to send the POD before leaving, and to report any overage, shortage, or damage."}, {"intent": "AT_DELIVERY", "name": "Delivery geofence entered", "tier": 3, "when": "On entering the delivery geofence", "does": "A geofence-triggered arrival confirmation."}, {"intent": "POST_DELIVERY", "name": "POD chase after arrival", "tier": 1, "when": "1 hr / 90 min / 2 hr / 4 hr after delivery arrival", "does": "Requests the signed POD and confirms the driver is unloaded; automatically stops once the POD is received."}, {"intent": "POST_DELIVERY", "name": "Load delivered without POD", "tier": 2, "when": "When the load is marked delivered but no POD is in", "does": "Fires the moment a load flips to Delivered with no proof of delivery attached."}, {"intent": "POST_DELIVERY", "name": "Scheduled POD sweeps", "tier": 2, "when": "Fixed daily times after delivery (e.g. 11 AM, 1 PM)", "does": "Batched POD-chase reminders at set times, so the team works one clean list."}, {"intent": "POST_DELIVERY", "name": "POD follow-up \u2014 next day", "tier": 2, "when": "1-2 days after delivery", "does": "Catches stragglers a day later so nothing reaches billing without a POD."}, {"intent": "POST_DELIVERY", "name": "Driver left without POD", "tier": 3, "when": "Driver leaves the delivery geofence, no POD received", "does": "Flags a driver who departed before sending paperwork."}, {"intent": "POST_DELIVERY", "name": "Delivery confirmation", "tier": 3, "when": "After delivery", "does": "Confirms completion and closes the loop with the team."}],COLOR={"PRE_PICKUP": "#0E6E82", "AT_PICKUP": "#1E7A5A", "PICKUP_NUMBER_RELEASE": "#7A5FA6", "IN_TRANSIT": "#A6742B", "PRE_DELIVERY": "#B5566B", "AT_DELIVERY": "#2E6DB4", "POST_DELIVERY": "#4A5568"},LABEL={"PRE_PICKUP": "Pre-Pickup", "AT_PICKUP": "At Pickup", "PICKUP_NUMBER_RELEASE": "Pickup # Release", "IN_TRANSIT": "In Transit", "PRE_DELIVERY": "Pre-Delivery", "AT_DELIVERY": "At Delivery", "POST_DELIVERY": "Post-Delivery"},TIER={"1": "Most customers", "2": "Common", "3": "Specialized"},STAGES=[{"k": "PRE_PICKUP", "label": "Pre-Pickup", "color": "#0E6E82", "blurb": "Before the truck reaches the shipper \u2014 get the load ready: driver contact, an ETA, and tracking turned on.", "count": 7}, {"k": "AT_PICKUP", "label": "At Pickup", "color": "#1E7A5A", "blurb": "Around arrival at the shipper \u2014 confirm check-in, request paperwork, and make sure tracking is accepted.", "count": 7}, {"k": "PICKUP_NUMBER_RELEASE", "label": "Pickup # Release", "color": "#7A5FA6", "blurb": "Release the pickup / PO number automatically \u2014 but only once tracking is active.", "count": 2}, {"k": "IN_TRANSIT", "label": "In Transit", "color": "#A6742B", "blurb": "While the load is moving \u2014 daily check-ins on multi-day hauls and delivery prep.", "count": 4}, {"k": "PRE_DELIVERY", "label": "Pre-Delivery", "color": "#B5566B", "blurb": "Approaching the receiver \u2014 confirm the delivery ETA and that the driver will hit the window.", "count": 4}, {"k": "AT_DELIVERY", "label": "At Delivery", "color": "#2E6DB4", "blurb": "At the receiver \u2014 confirm the driver is on-site and start the proof-of-delivery conversation.", "count": 5}, {"k": "POST_DELIVERY", "label": "Post-Delivery", "color": "#4A5568", "blurb": "After unloading \u2014 collect the signed POD and close the load out.", "count": 6}];
+const body=document.getElementById('body'),empty=document.getElementById('empty'),count=document.getElementById('count'),q=document.getElementById('q');
+let filter='ALL';
+function esc(s){return (s||'').replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));}
+function tpl(r){return `Checkpoint template — ${r.name}\nStage: ${LABEL[r.intent]}\nWhen it fires: ${r.when}\nWhat it does: ${r.does}\n\nHow to set up in Autopilot: create a checkpoint with this trigger timing, add conditions so it only fires when relevant (for example, only if the driver's phone is on file, or only while the load is in transit), and write a short driver message for it.`;}
+function doCopy(text,btn){const label=btn.dataset.lbl||btn.textContent;btn.dataset.lbl=label;const ok=()=>{btn.textContent='Copied ✓';setTimeout(()=>btn.textContent=label,1400);};const fb=()=>{try{const ta=document.createElement('textarea');ta.value=text;ta.style.position='fixed';ta.style.top='-1000px';document.body.appendChild(ta);ta.focus();ta.select();document.execCommand('copy');document.body.removeChild(ta);ok();}catch(e){btn.textContent='Select & ⌘/Ctrl+C';}};if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(ok,fb);}else fb();}
+document.addEventListener('click',function(e){const b=e.target.closest('.ctbtn');if(!b)return;doCopy(decodeURIComponent(b.dataset.tpl),b);});
+function card(r){const c=COLOR[r.intent];return `<article class="card" style="--sc:${c}">
+ <div class="ct"><h3>${esc(r.name)}</h3><span class="tier t${r.tier}">${esc(TIER[r.tier])}</span></div>
+ <span class="stag">${esc(LABEL[r.intent])}</span>
+ <div class="row"><span class="k">When</span><span class="v">${esc(r.when)}</span></div>
+ <div class="row"><span class="k">Does</span><span class="v does">${esc(r.does)}</span></div><button class="ctbtn" type="button" data-tpl="${encodeURIComponent(tpl(r))}">Copy as template</button></article>`;}
+function render(){
+ const term=q.value.trim().toLowerCase();
+ const match=r=>(filter==='ALL'||r.intent===filter)&&(!term||(r.name+' '+r.when+' '+r.does+' '+LABEL[r.intent]).toLowerCase().includes(term));
+ const items=DATA.filter(match);
+ count.textContent=items.length+' checkpoints';
+ empty.hidden=items.length>0;
+ let html='';
+ for(const s of STAGES){
+   const rs=items.filter(r=>r.intent===s.k); if(!rs.length) continue;
+   html+=`<div class="stageblurb"><span class="sdot" style="background:${s.color}"></span><div><h2>${esc(s.label)}</h2><p>${esc(s.blurb)}</p></div></div>`;
+   html+=`<div class="grid">${rs.map(card).join('')}</div>`;
+ }
+ body.innerHTML=html;
+}
+document.querySelectorAll('.chip').forEach(ch=>ch.addEventListener('click',()=>{filter=ch.dataset.f;document.querySelectorAll('.chip').forEach(x=>x.setAttribute('aria-pressed',x===ch));render();}));
+q.addEventListener('input',render);render();
+</script>
+</body>
+</html>
